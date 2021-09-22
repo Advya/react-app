@@ -17,6 +17,7 @@ function App() {
         >
           Learn React
         </a>
+        <code>if(react)</code>
       </header>
     </div>
   );

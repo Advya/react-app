@@ -8,7 +8,20 @@ import Footer from './components/Footer'
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false)
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([
+    {
+      id: 1,
+      text: 'Something to do',
+      day: 'Feb 5th at 2:30pm',
+      reminder: true,
+    },
+    {
+      id: 2,
+      text: 'More to do',
+      day: 'Feb 6th at 2:30pm',
+      reminder: false,
+    }
+  ])
 
   useEffect(() => {
     const getTasks = async () => {
@@ -28,7 +41,7 @@ const App = () => {
 
   // Add Task
   const addTask = async (task) => {
-    const res = await fetch('http://localhost:5000/tasks', {
+    const res = await fetch('http://localhost:3000/tasks', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

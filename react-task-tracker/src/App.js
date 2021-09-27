@@ -77,8 +77,15 @@ const App = () => {
   return (
     <div className="container">
       <div className="App">
-        <Header />
-        <h1>Hello From REACT</h1>
+        <Header onAdd ={()=> setShowAddTask(!showAddTask)}
+        showAdd={showAddTask} />
+
+        <Tasks
+          tasks={tasks}
+          onDelete={deleteTask}
+          onToggle={toggleReminder} 
+        />
+        
       </div>
     </div>
   );

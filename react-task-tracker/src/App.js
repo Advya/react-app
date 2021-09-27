@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 import Header from './components/Header'
 import Tasks from './components/Tasks'
+import AddTask from './components/AddTask'
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false)
@@ -75,20 +76,35 @@ const App = () => {
   }
 
   return (
-    <div className="container">
-      <div className="App">
-        <Header onAdd ={()=> setShowAddTask(!showAddTask)}
-        showAdd={showAddTask} />
-
-        <Tasks
-          tasks={tasks}
-          onDelete={deleteTask}
-          onToggle={toggleReminder} 
+    <Router>
+      <div className='container'>
+        <Header
+          onAdd={() => setShowAddTask(!showAddTask)}
+          showAdd={showAddTask}
         />
-        
+        <Route
+          path='/'
+          exact
+          render={(props) => (
+            <>
+              {showAddTask && <AddTask onAdd={addTask} />}
+              {tasks.length > 0 ? (
+                <Tasks
+                  tasks={tasks}
+                  onDelete={deleteTask}
+                  onToggle={toggleReminder}
+                />
+              ) : (
+                'No Tasks To Show'
+              )}
+            </>
+          )}
+        />
+        <Route path='/about' component={About} />
+        <Footer />
       </div>
-    </div>
-  );
+    </Router>
+  )
 }
 
 export default App;
